@@ -1,0 +1,226 @@
+/* European Style Resume Theme
+   Compatible with MarkdownResume App
+   Updated: Dec 2025
+*/
+
+:root {
+    /* Palette */
+    --col-sidebar-bg: #dae4f0;
+    --col-sidebar-text: #3e4e62;
+    --col-main-bg: #ffffff;
+    --col-main-text: #333333;
+    --col-accent: #2c3e50;
+    --col-timeline-line: #b0c4de;
+    
+    /* Dimensions */
+    --dim-sidebar-width: 32%;
+    --dim-a4-width: 210mm;
+    --dim-a4-min-height: 296mm;
+}
+
+/* --- Global Reset --- */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0; /* Contrast background for app preview */
+    -webkit-font-smoothing: antialiased;
+    color: var(--col-main-text);
+}
+
+/* --- Main Container (@resume) --- */
+.resume {
+    display: grid;
+    grid-template-columns: var(--dim-sidebar-width) 1fr;
+    width: var(--dim-a4-width);
+    min-height: var(--dim-a4-min-height);
+    margin: 0 auto;
+    background-color: var(--col-main-bg);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* --- Sidebar (@sidebar) --- */
+.sidebar {
+    background-color: var(--col-sidebar-bg);
+    color: var(--col-sidebar-text);
+    padding: 40px 25px;
+    font-size: 0.9rem;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.sidebar img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 30px auto;
+    display: block;
+    border: 4px solid rgba(255,255,255,0.5);
+}
+
+.sidebar h3 {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1.2px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+    margin: 30px 0 15px 0;
+    color: var(--col-accent);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* --- Main Content (@main) --- */
+.main {
+    padding: 40px;
+    background-color: var(--col-main-bg);
+}
+
+/* Header Title (H1 inside Main) */
+.main h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    margin: 0 0 5px 0;
+    line-height: 1;
+    color: var(--col-accent);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+/* Subtitle/Role (Bold paragraph immediately after H1) */
+.main h1 + .paragraph-wrapper p strong,
+.main h1 + strong {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* Standard Section Headers (H2) */
+.main h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin: 40px 0 25px 0;
+}
+
+/* --- Timeline Job Section (@job-section) --- */
+.job-section {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 25px;
+    border-left: 2px solid var(--col-timeline-line);
+    display: grid;
+    grid-template-columns: 90px 1fr; /* Date | Content */
+    gap: 0 20px; /* Zero vertical gap to enable tight packing */
+    page-break-inside: avoid;
+}
+
+/* Timeline Dot */
+.job-section::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--col-accent);
+    border: 2px solid white;
+}
+
+/* --- Fix for Paragraph Wrappers --- */
+/* The generator wraps text in div.paragraph-wrapper. We must reset its spacing. */
+.job-section .paragraph-wrapper p {
+    margin: 0; /* CRITICAL: Remove default browser margins from P tags */
+    padding: 0;
+}
+
+/* 1. Date Column (The first wrapper in the section) */
+.job-section > .paragraph-wrapper:first-child {
+    grid-column: 1;
+    text-align: right;
+    margin-top: 3px; /* Align with H3 */
+}
+
+.job-section > .paragraph-wrapper:first-child p {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--col-accent);
+    line-height: 1.2;
+    white-space: pre-line;
+}
+
+/* 2. Job Title (H3) */
+.job-section h3 {
+    grid-column: 2;
+    margin: 0 0 2px 0; /* TIGHT: Only 2px space below title */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--col-main-text);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* 3. Company & Description (Wrappers following the H3) */
+.job-section h3 ~ .paragraph-wrapper {
+    grid-column: 2;
+    margin-bottom: 6px; /* COMPRESSED: 6px space between text blocks */
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.3;
+}
+
+/* 4. Description Lists */
+.job-section ul {
+    grid-column: 2;
+    margin: 0;
+    padding-left: 15px;
+    color: #444;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.job-section li {
+    margin-bottom: 3px;
+}
+
+/* --- Print Overrides --- */
+@media print {
+    body {
+        padding: 0;
+        background-color: white;
+    }
+    
+    .resume {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        min-height: auto;
+    }
+    
+    .sidebar {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    h1, h2, h3 { page-break-after: avoid; }
+    .job-section { page-break-inside: avoid; }
+}
