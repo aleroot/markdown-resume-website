@@ -13,5 +13,3 @@ All files, resumes, and assets created or managed by MarkdownResume are stored l
 **3. Third-Party Services**
 MarkdownResume does not integrate with any third-party analytics or tracking SDKs.
 
-**4. Contact**
-If you have any questions about this policy, please contact us at: [this email](mailto:alessio.pollero@gmail.com)
